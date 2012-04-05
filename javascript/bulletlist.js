@@ -32,7 +32,7 @@ JSBulletList = function($) {
 	function addEnterKeyEventHandlerToBulletPoints(idPrefix) {
 		$('#'+idPrefix+" ul").on("keyup", "li input", function(event){
 				if (event.which == 13) {
-					handleEnterKeyOnBulletPoint(event.srcElement.id);
+					handleEnterKeyOnBulletPoint(this.id);
 				}
 			});
 	}
