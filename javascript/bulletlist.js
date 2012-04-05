@@ -3,6 +3,9 @@ var JSBulletList = {};
 JSBulletList = function($) {
 	var bulletList = {};
 	
+	var bulletListSuffix = "_BulletList";
+	var bulletSuffix = "_Bullet_";
+	
 	// Adds a new editable bullet point list to a placeholder
 	bulletList.setupNewBulletList = function(containingDivId) {
 		$('#'+containingDivId).html(newBulletListHtml(containingDivId));
@@ -10,15 +13,19 @@ JSBulletList = function($) {
 	
 	// Focuses the cursor on the first bullet point in the list
 	bulletList.setFocusOnFirstBulletPoint = function(containingDivId) {
-		$('#'+containingDivId+" ul li:first-child input").focus();
+		setFocusOnSpecificBulletPoint(containingDivId, 1);
 	}
 	
 	function newBulletListHtml(idPrefix) {		
-		return "<ul id='"+idPrefix+"_BulletList' class='jsBulletList'>"+newBulletPointHtml(idPrefix, 1, "")+"</ul>";
+		return "<ul id='"+idPrefix+bulletListSuffix+"' class='jsBulletList'>"+newBulletPointHtml(idPrefix, 1, "")+"</ul>";
 	}
 	
 	function newBulletPointHtml(idPrefix, bulletPointNumber, currentText) {
-		return "<li id='"+idPrefix+"_Bullet_"+bulletPointNumber+"'><input type='text'>"+currentText+"</input></li>";
+		return "<li id='"+idPrefix+bulletSuffix+bulletPointNumber+"'><input type='text'>"+currentText+"</input></li>";
+	}
+	
+	function setFocusOnSpecificBulletPoint(idPrefix, bulletPointNumber) {
+		$('#'+idPrefix+bulletSuffix+bulletPointNumber+" input").focus();
 	}
 	
 	return bulletList;
