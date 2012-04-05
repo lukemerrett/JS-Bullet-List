@@ -8,7 +8,9 @@ JSBulletList = function($) {
 	}
 	
 	function newBulletListHtml() {
-		// TODO
+		var html = "<ul class='jsBulletList'><li><input type='text'></input></li></ul>";
+		
+		return html;
 	}
 	
 	return bulletList;
