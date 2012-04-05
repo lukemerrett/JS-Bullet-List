@@ -13,10 +13,8 @@ JSBulletList = function($) {
 		$('#'+containingDivId+" ul li:first-child input").focus();
 	}
 	
-	function newBulletListHtml(idPrefix) {
-		var firstBulletPoint = newBulletPointHtml(idPrefix, 1, "");
-		
-		return "<ul id='"+idPrefix+"_BulletList' class='jsBulletList'>"+firstBulletPoint+"</ul>";
+	function newBulletListHtml(idPrefix) {		
+		return "<ul id='"+idPrefix+"_BulletList' class='jsBulletList'>"+newBulletPointHtml(idPrefix, 1, "")+"</ul>";
 	}
 	
 	function newBulletPointHtml(idPrefix, bulletPointNumber, currentText) {
