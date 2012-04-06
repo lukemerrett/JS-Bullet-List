@@ -23,3 +23,11 @@ Usage
    the users cursor on the first point in the list
    (This is optional)
    IE: JSBulletList.setFocusOnFirstBulletPoint("divBulletList");
+   
+   
+Compatibility
+=============
+Tested on:
+	Google Chrome
+	Mozilla Firefox
+	Internet Explorer 9
