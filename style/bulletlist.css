@@ -1,4 +1,5 @@
 ul.jsBulletList li input {
 	border: none;
 	resize: none;
+	width: 100%;
 }
