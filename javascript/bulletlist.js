@@ -10,21 +10,26 @@ function BulletPointObject(inputBoxId) {
 function BulletListModel() {
 
 	// Current unique identifier for all bullet points
+	// Used to ensure the generated client id is unique for the model
 	this.currentUid = -1;
 
 	// Holds all the bullet points in the group
 	this.bulletPoints = [];
 }
 
+// Add a bullet point to the model.  We add at a specific position by splicing the
+// array; this means we can efficiently preserve the ordering of the bullet points
+// in the instance that one is inserted above an existing point
 BulletListModel.prototype.addBulletPoint = function(position, bulletPointObject) {
-	// Add at a specific index to preserve ordering
     this.bulletPoints.splice(position, 0, bulletPointObject);
 };
 
+// Get a bullet point by its index within the array
 BulletListModel.prototype.getBulletPointByIndex = function(position) {
 	return this.bulletPoints[position];
 }
 
+// Get a bullet point's index by the inputBoxId stored on the bullet point object
 BulletListModel.prototype.getBulletPointIndexByInputBoxId = function(inputBoxId) {
 	var bulletPoint = $.grep(this.bulletPoints, function(value,index){
 		return value.inputBoxId == inputBoxId;
@@ -33,6 +38,8 @@ BulletListModel.prototype.getBulletPointIndexByInputBoxId = function(inputBoxId)
 	return $.inArray(bulletPoint, this.bulletPoints);
 }
 
+// Reove a bullet point from the array. This is done with a splice and subsequentially
+// preserves the indexing and ordering of the points
 BulletListModel.prototype.removeBulletPoint = function(position) {
 	this.bulletPoints.splice(position, 1);
 };
@@ -53,6 +60,8 @@ JSBulletList = function($) {
 	
 	var enterKeyCode = 13;
 	var backspaceKeyCode = 8;
+	var upArrowKeyCode = 38;
+	var downArrowKeyCode = 40;
 	
 	// Adds a new editable bullet point list to a placeholder
 	bulletList.setupNewBulletList = function(containingDivId) {
@@ -69,7 +78,7 @@ JSBulletList = function($) {
 	// Focuses the cursor on the first bullet point in the list
 	bulletList.setFocusOnFirstBulletPoint = function(containingDivId) {
 		var bulletPoint = bulletListModels[containingDivId].getBulletPointByIndex(0);
-		setFocusOnSpecificBulletPoint(bulletPoint.inputBoxId);
+		setFocusOnSpecificBulletPoint(bulletPoint);
 	}
 	
 	function newBulletListHtml(idPrefix) {		
@@ -104,6 +113,12 @@ JSBulletList = function($) {
 				if (event.which == backspaceKeyCode) {
 					handleBackspaceKeyOnBulletPoint(this.id);
 				}
+				if (event.which == upArrowKeyCode) {
+					navigationUpOneBulletPoint(this.id);
+				}
+				if (event.which == downArrowKeyCode) {
+					navigationDownOneBulletPoint(this.id);
+				}
 			});
 	}
 	
@@ -119,7 +134,7 @@ JSBulletList = function($) {
 		
 		var bulletPointToSwitchTo = bulletListModels[idPrefix].getBulletPointByIndex(newIndex);
 		
-		setFocusOnSpecificBulletPoint(bulletPointToSwitchTo.inputBoxId);
+		setFocusOnSpecificBulletPoint(bulletPointToSwitchTo);
 	}
 	
 	// Deletes the current bullet point if backspace is pressed when there is no text left in the bullet point
@@ -135,14 +150,22 @@ JSBulletList = function($) {
 
 			var bulletPointToSwitchTo = bulletListModels[idPrefix].getBulletPointByIndex(bulletPointIndex - 1);
 			
-			setFocusOnSpecificBulletPoint(bulletPointToSwitchTo.inputBoxId);
+			setFocusOnSpecificBulletPoint(bulletPointToSwitchTo);
 			
 			bulletListModels[idPrefix].removeBulletPoint(bulletPointIndex);
-		}
+		};
 	}
 	
-	function setFocusOnSpecificBulletPoint(inputBoxId) {
-		$('#'+inputBoxId).focus();
+	function navigationUpOneBulletPoint(inputBoxId) {
+		
+	}
+	
+	function navigationDownOneBulletPoint(inputBoxId) {
+		
+	}
+	
+	function setFocusOnSpecificBulletPoint(bulletPoint) {
+		$('#'+bulletPoint.inputBoxId).focus();
 	}
 	
 	return bulletList;
