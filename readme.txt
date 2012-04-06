@@ -1,8 +1,4 @@
 
-/*************************************************************/
-					JS BULLET LIST README
-/*************************************************************/
-
 JS Bullet list is a Javascript library for creating a bullet 
 point list the user can edit and add to.
 
