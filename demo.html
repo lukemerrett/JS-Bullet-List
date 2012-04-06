@@ -10,7 +10,28 @@
 				JSBulletList.setFocusOnFirstBulletPoint(placeholderDivId);
 				
 				$('#btnCreateList').html("Refresh Bullet Point List");
+				$('#btnExportListAsText').show();
+				$('#btnExportListAsHtml').show();
 			};
+			
+			function exportCurrentListAsText(placeholderDivId) {
+				var exportedText = JSBulletList.exportListAsText(placeholderDivId);
+				
+				$("#divExportedList").html(exportedText);
+				$('#btnClearExport').show();
+			};
+			
+			function exportCurrentListAsHtml(placeholderDivId) {
+				var exportedText = JSBulletList.exportListAsHtml(placeholderDivId);
+				
+				$("#divExportedList").html(exportedText);
+				$('#btnClearExport').show();
+			};
+			
+			function clearExport() {
+				$("#divExportedList").html("");
+				$("#btnClearExport").hide();
+			}
 		</script>
 		<title>
 			JS Bullet List Demo
@@ -22,6 +43,11 @@
 		</h2>
 		
 		<button id="btnCreateList" onclick="setupNewList('divBulletList');">Create Bullet Point List</button>
+		<button id="btnExportListAsText" onclick="exportCurrentListAsText('divBulletList');" style="display:none;">Export List as Text</button>
+		<button id="btnExportListAsHtml" onclick="exportCurrentListAsHtml('divBulletList');" style="display:none;">Export List as Html</button>
+		<button id="btnClearExport" onclick="clearExport();" style="display:none;">Clear Export</button>
+		<div id="divExportedList"></div>
+		<hr/>
 		<div id="divBulletList"></div>
 	</body>
 </html>

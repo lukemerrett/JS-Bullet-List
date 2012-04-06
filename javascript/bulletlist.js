@@ -6,6 +6,15 @@ function BulletPointObject(inputBoxId) {
 	this.inputBoxId = inputBoxId;
 }
 
+BulletPointObject.prototype.exportBulletPointAsText = function() {
+	return "*" + $('#'+this.inputBoxId).val();
+}
+
+BulletPointObject.prototype.exportBulletPointAsHtml = function() {
+	return "<li>" + $('#'+this.inputBoxId).val() + "</li>";
+}
+
+
 // Holds details on all the bullet points within a group
 function BulletListModel() {
 
@@ -79,6 +88,28 @@ JSBulletList = function($) {
 	bulletList.setFocusOnFirstBulletPoint = function(containingDivId) {
 		var bulletPoint = bulletListModels[containingDivId].getBulletPointByIndex(0);
 		setFocusOnSpecificBulletPoint(bulletPoint);
+	}
+	
+	bulletList.exportListAsText = function(containingDivId) {
+		var textToExport = "";
+		
+		$.each(bulletListModels[containingDivId].bulletPoints, function(key, value) {
+			textToExport += value.exportBulletPointAsText() + "<br/>";
+		});
+		
+		return textToExport;
+	}
+	
+	bulletList.exportListAsHtml = function(containingDivId) {
+		var textToExport = "<ul>";
+		
+		$.each(bulletListModels[containingDivId].bulletPoints, function(key, value) {
+			textToExport += value.exportBulletPointAsHtml();
+		});
+		
+		textToExport += "</ul>";
+		
+		return textToExport;
 	}
 	
 	function newBulletListHtml(idPrefix) {		
