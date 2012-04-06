@@ -11,7 +11,7 @@ JSBulletList = function($) {
 	bulletList.setupNewBulletList = function(containingDivId) {
 		$('#'+containingDivId).html(newBulletListHtml(containingDivId));
 		
-		addEnterKeyEventHandlerToBulletPoints(containingDivId);
+		addKeyEventHandlersToBulletPoints(containingDivId);
 	}
 	
 	// Focuses the cursor on the first bullet point in the list
@@ -29,7 +29,7 @@ JSBulletList = function($) {
 				"</li>";
 	}
 	
-	function addEnterKeyEventHandlerToBulletPoints(idPrefix) {
+	function addKeyEventHandlersToBulletPoints(idPrefix) {
 		$('#'+idPrefix+" ul").on("keyup", "li input", function(event){
 				if (event.which == 13) {
 					handleEnterKeyOnBulletPoint(this.id);
@@ -43,7 +43,7 @@ JSBulletList = function($) {
 		var newNumber = currentNumber + 1
 		var idPrefix = currentListItem.parent().parent().attr("id");
 		
-		currentListItem.append(newBulletPointHtml(idPrefix, newNumber, ""));
+		currentListItem.after(newBulletPointHtml(idPrefix, newNumber, ""));
 		setFocusOnSpecificBulletPoint(idPrefix, newNumber);
 	}
 	
