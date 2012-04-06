@@ -43,6 +43,7 @@ JSBulletList = function($) {
 			});
 	}
 	
+	// Adds a new bullet point under the existing bullet point when pressing enter
 	function handleEnterKeyOnBulletPoint(inputBoxId) {
 		var currentListItem = $('#'+inputBoxId).parent();
 		var currentNumber = parseInt($('#'+inputBoxId).attr("name"));
@@ -53,8 +54,19 @@ JSBulletList = function($) {
 		setFocusOnSpecificBulletPoint(idPrefix, newNumber);
 	}
 	
+	// Deletes the current bullet point if backspace is pressed when there is no text left in the bullet point
 	function handleBackspaceKeyOnBulletPoint(inputBoxId) {
+		var inputBoxTextLength = $('#'+inputBoxId).val().length;
 		
+		if (inputBoxTextLength == 0) {
+			var currentListItem = $('#'+inputBoxId).parent();
+			var currentNumber = parseInt($('#'+inputBoxId).attr("name"));
+			var numberToSwitchFocusTo = currentNumber - 1;
+			var idPrefix = currentListItem.parent().parent().attr("id");
+			
+			currentListItem.remove();
+			setFocusOnSpecificBulletPoint(idPrefix, numberToSwitchFocusTo);
+		}
 	}
 	
 	function setFocusOnSpecificBulletPoint(idPrefix, bulletPointNumber) {
