@@ -105,7 +105,7 @@ JSBulletList = function($) {
 	}
 	
 	function addKeyEventHandlersToBulletPoints(idPrefix) {
-		$('#'+idPrefix+" ul").on("keyup", "li input", function(event){
+		$('#'+idPrefix+" ul").on("keydown", "li input", function(event){
 				if (event.which == enterKeyCode) {
 					handleEnterKeyOnBulletPoint(idPrefix, this.id);
 				}
