@@ -5,10 +5,12 @@
 		<script src="javascript/bulletlist.js" type="text/javascript"></script>
 		
 		<script type="text/javascript">
-			$(document).ready(function() {
-				JSBulletList.setupNewBulletList("divBulletList");
-				JSBulletList.setFocusOnFirstBulletPoint("divBulletList");
-			});
+			function setupNewList(placeholderDivId) {
+				JSBulletList.setupNewBulletList(placeholderDivId);
+				JSBulletList.setFocusOnFirstBulletPoint(placeholderDivId);
+				
+				$('#btnCreateList').html("Refresh Bullet Point List");
+			};
 		</script>
 		<title>
 			JS Bullet List Demo
@@ -19,6 +21,7 @@
 			Demonstration of JS Bullet List in action
 		</h2>
 		
+		<button id="btnCreateList" onclick="setupNewList('divBulletList');">Create Bullet Point List</button>
 		<div id="divBulletList"></div>
 	</body>
 </html>
