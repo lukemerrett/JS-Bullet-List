@@ -7,6 +7,9 @@ JSBulletList = function($) {
 	var bulletSuffix = "_Bullet_";
 	var inputSuffix = "_Input_";
 	
+	var enterKeyCode = 13;
+	var backspaceKeyCode = 8;
+	
 	// Adds a new editable bullet point list to a placeholder
 	bulletList.setupNewBulletList = function(containingDivId) {
 		$('#'+containingDivId).html(newBulletListHtml(containingDivId));
@@ -31,8 +34,11 @@ JSBulletList = function($) {
 	
 	function addKeyEventHandlersToBulletPoints(idPrefix) {
 		$('#'+idPrefix+" ul").on("keyup", "li input", function(event){
-				if (event.which == 13) {
+				if (event.which == enterKeyCode) {
 					handleEnterKeyOnBulletPoint(this.id);
+				}
+				if (event.which == backspaceKeyCode) {
+					handleBackspaceKeyOnBulletPoint(this.id);
 				}
 			});
 	}
@@ -45,6 +51,10 @@ JSBulletList = function($) {
 		
 		currentListItem.after(newBulletPointHtml(idPrefix, newNumber, ""));
 		setFocusOnSpecificBulletPoint(idPrefix, newNumber);
+	}
+	
+	function handleBackspaceKeyOnBulletPoint(inputBoxId) {
+		
 	}
 	
 	function setFocusOnSpecificBulletPoint(idPrefix, bulletPointNumber) {
