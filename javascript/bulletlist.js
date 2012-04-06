@@ -100,32 +100,30 @@ JSBulletList = function($) {
 		bulletListModels[idPrefix].addBulletPoint(position, newPoint);
 	
 		return "<li id='"+idPrefix+bulletSuffix+bulletPointNumber+"'>"+
-					"<input type='text' id='"+inputBoxId+"' name='"+bulletPointNumber+"'>"+
-					"</input>"+
+					"<input type='text' id='"+inputBoxId+"'></input>"+
 				"</li>";
 	}
 	
 	function addKeyEventHandlersToBulletPoints(idPrefix) {
 		$('#'+idPrefix+" ul").on("keyup", "li input", function(event){
 				if (event.which == enterKeyCode) {
-					handleEnterKeyOnBulletPoint(this.id);
+					handleEnterKeyOnBulletPoint(idPrefix, this.id);
 				}
 				if (event.which == backspaceKeyCode) {
-					handleBackspaceKeyOnBulletPoint(this.id);
+					handleBackspaceKeyOnBulletPoint(idPrefix, this.id);
 				}
 				if (event.which == upArrowKeyCode) {
-					navigationUpOneBulletPoint(this.id);
+					navigateBetweenBulletPoints(idPrefix, this.id, -1);
 				}
 				if (event.which == downArrowKeyCode) {
-					navigationDownOneBulletPoint(this.id);
+					navigateBetweenBulletPoints(idPrefix, this.id, 1);
 				}
 			});
 	}
 	
 	// Adds a new bullet point under the existing bullet point when pressing enter
-	function handleEnterKeyOnBulletPoint(inputBoxId) {
+	function handleEnterKeyOnBulletPoint(idPrefix, inputBoxId) {
 		var currentListItem = $('#'+inputBoxId).parent();
-		var idPrefix = currentListItem.parent().parent().attr("id");
 		
 		var bulletPointIndex = bulletListModels[idPrefix].getBulletPointIndexByInputBoxId(inputBoxId);
 		var newIndex = bulletPointIndex + 1;
@@ -138,12 +136,11 @@ JSBulletList = function($) {
 	}
 	
 	// Deletes the current bullet point if backspace is pressed when there is no text left in the bullet point
-	function handleBackspaceKeyOnBulletPoint(inputBoxId) {
+	function handleBackspaceKeyOnBulletPoint(idPrefix, inputBoxId) {
 		var inputBoxTextLength = $('#'+inputBoxId).val().length;
 		
 		if (inputBoxTextLength == 0) {
 			var currentListItem = $('#'+inputBoxId).parent();
-			var idPrefix = currentListItem.parent().parent().attr("id");
 			currentListItem.remove();
 			
 			var bulletPointIndex = bulletListModels[idPrefix].getBulletPointIndexByInputBoxId(inputBoxId);
@@ -156,12 +153,14 @@ JSBulletList = function($) {
 		};
 	}
 	
-	function navigationUpOneBulletPoint(inputBoxId) {
+	function navigateBetweenBulletPoints(idPrefix, inputBoxId, increment) {
+		var bulletPointIndex = bulletListModels[idPrefix].getBulletPointIndexByInputBoxId(inputBoxId);
+		var bulletPointToSwitchTo = bulletListModels[idPrefix].getBulletPointByIndex(bulletPointIndex + increment);
 		
-	}
-	
-	function navigationDownOneBulletPoint(inputBoxId) {
-		
+		// Bullet point doesn't necessarily exist above or below the current point
+		if (bulletPointToSwitchTo != null) {
+			setFocusOnSpecificBulletPoint(bulletPointToSwitchTo);
+		}
 	}
 	
 	function setFocusOnSpecificBulletPoint(bulletPoint) {
