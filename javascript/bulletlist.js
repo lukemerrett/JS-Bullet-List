@@ -141,7 +141,7 @@ JSBulletList = function($) {
 					handleEnterKeyOnBulletPoint(idPrefix, this.id);
 				}
 				if (event.which == backspaceKeyCode) {
-					handleBackspaceKeyOnBulletPoint(idPrefix, this.id);
+					handleBackspaceKeyOnBulletPoint(event, idPrefix, this.id);
 				}
 				if (event.which == upArrowKeyCode) {
 					navigateBetweenBulletPoints(idPrefix, this.id, -1);
@@ -167,10 +167,13 @@ JSBulletList = function($) {
 	}
 	
 	// Deletes the current bullet point if backspace is pressed when there is no text left in the bullet point
-	function handleBackspaceKeyOnBulletPoint(idPrefix, inputBoxId) {
+	function handleBackspaceKeyOnBulletPoint(event, idPrefix, inputBoxId) {
 		var inputBoxTextLength = $('#'+inputBoxId).val().length;
 		
 		if (inputBoxTextLength == 0) {
+			// Stop backspace deleting a character on the line we are changing focus to
+			event.preventDefault();
+			
 			var currentListItem = $('#'+inputBoxId).parent();
 			currentListItem.remove();
 			
