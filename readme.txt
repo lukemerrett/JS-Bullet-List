@@ -1,10 +1,7 @@
 
-JS Bullet list is a Javascript library for creating a bullet 
-point list the user can edit and add to.
+JS Bullet list is a Javascript library for creating a bullet point list the user can edit and add to.
 
-The goal of this project is to establish a lightweight client 
-side library for users to create, store and export their own 
-lists.
+The goal of this project is to establish a lightweight client side library for users to create, store and export their own lists.
 
 Dependencies
 ============
