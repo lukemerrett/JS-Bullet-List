@@ -11,7 +11,7 @@ Disclaimer & Licence
     GNU General Public License for more details.
 
     Please see the license.txt file or http://www.gnu.org/licenses/ 
-	for further details
+    for further details
 
 Introduction
 ============
