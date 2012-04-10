@@ -53,6 +53,11 @@ BulletListModel.prototype.removeBulletPoint = function(position) {
 	this.bulletPoints.splice(position, 1);
 };
 
+// Returns the number of bullet points in this model
+BulletListModel.prototype.getNumberOfBulletPointsPresent = function() {
+	return this.bulletPoints.length;
+}
+
 var JSBulletList = {};
 
 JSBulletList = function($) {
@@ -170,7 +175,8 @@ JSBulletList = function($) {
 	function handleBackspaceKeyOnBulletPoint(event, idPrefix, inputBoxId) {
 		var inputBoxTextLength = $('#'+inputBoxId).val().length;
 		
-		if (inputBoxTextLength == 0) {
+		// Only run if there is no text in the input box and this isn't the only bullet point in the list
+		if (inputBoxTextLength == 0 && bulletListModels[idPrefix].getNumberOfBulletPointsPresent() != 1) {
 			// Stop backspace deleting a character on the line we are changing focus to
 			event.preventDefault();
 			
