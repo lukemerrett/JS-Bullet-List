@@ -10,7 +10,8 @@ Disclaimer & Licence
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    Please see http://www.gnu.org/licenses/ for more details
+    Please see the license.txt file or http://www.gnu.org/licenses/ 
+	for further details
 
 Introduction
 ============
