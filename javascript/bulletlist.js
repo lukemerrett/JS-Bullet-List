@@ -1,4 +1,3 @@
-
 // Holds details on a single bullet point
 function BulletPointObject(inputBoxId) {
 	
@@ -117,13 +116,13 @@ JSBulletList = function($) {
 		return textToExport;
 	}
 	
-	function newBulletListHtml(idPrefix) {		
+	var newBulletListHtml = function(idPrefix) {		
 		return "<ul id='"+idPrefix+bulletListSuffix+"' class='jsBulletList'>"+
 					newBulletPointHtml(idPrefix, 0)+
 				"</ul>";
 	}
 	
-	function newBulletPointHtml(idPrefix, position) {
+	var newBulletPointHtml = function(idPrefix, position) {
 	
 		bulletListModels[idPrefix].currentUid++;
 		
@@ -140,7 +139,7 @@ JSBulletList = function($) {
 				"</li>";
 	}
 	
-	function addKeyEventHandlersToBulletPoints(idPrefix) {
+	var addKeyEventHandlersToBulletPoints = function(idPrefix) {
 		$('#'+idPrefix+" ul").on("keydown", "li input", function(event){
 				if (event.which == enterKeyCode) {
 					handleEnterKeyOnBulletPoint(idPrefix, this.id);
@@ -158,7 +157,7 @@ JSBulletList = function($) {
 	}
 	
 	// Adds a new bullet point under the existing bullet point when pressing enter
-	function handleEnterKeyOnBulletPoint(idPrefix, inputBoxId) {
+	var handleEnterKeyOnBulletPoint = function(idPrefix, inputBoxId) {
 		var currentListItem = $('#'+inputBoxId).parent();
 		
 		var bulletPointIndex = bulletListModels[idPrefix].getBulletPointIndexByInputBoxId(inputBoxId);
@@ -172,7 +171,7 @@ JSBulletList = function($) {
 	}
 	
 	// Deletes the current bullet point if backspace is pressed when there is no text left in the bullet point
-	function handleBackspaceKeyOnBulletPoint(event, idPrefix, inputBoxId) {
+	var handleBackspaceKeyOnBulletPoint = function(event, idPrefix, inputBoxId) {
 		var inputBoxTextLength = $('#'+inputBoxId).val().length;
 		
 		// Only run if there is no text in the input box and this isn't the only bullet point in the list
@@ -193,7 +192,7 @@ JSBulletList = function($) {
 		};
 	}
 	
-	function navigateBetweenBulletPoints(idPrefix, inputBoxId, increment) {
+	var navigateBetweenBulletPoints = function(idPrefix, inputBoxId, increment) {
 		var bulletPointIndex = bulletListModels[idPrefix].getBulletPointIndexByInputBoxId(inputBoxId);
 		var bulletPointToSwitchTo = bulletListModels[idPrefix].getBulletPointByIndex(bulletPointIndex + increment);
 		
@@ -203,7 +202,7 @@ JSBulletList = function($) {
 		}
 	}
 	
-	function setFocusOnSpecificBulletPoint(bulletPoint) {
+	var setFocusOnSpecificBulletPoint = function(bulletPoint) {
 		$('#'+bulletPoint.inputBoxId).focus();
 	}
 	
