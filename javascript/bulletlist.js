@@ -1,5 +1,5 @@
 // Holds details on a single bullet point
-function BulletPointObject(inputBoxId) {
+var BulletPointObject = function(inputBoxId) {
 	
 	// The client id of the input box this object refers to
 	this.inputBoxId = inputBoxId;
@@ -15,7 +15,7 @@ BulletPointObject.prototype.exportBulletPointAsHtml = function() {
 
 
 // Holds details on all the bullet points within a group
-function BulletListModel() {
+var BulletListModel = function() {
 
 	// Current unique identifier for all bullet points
 	// Used to ensure the generated client id is unique for the model
