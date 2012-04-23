@@ -1,7 +1,7 @@
-function BulletPointObject(inputBoxId){this.inputBoxId=inputBoxId;}
+var BulletPointObject=function(inputBoxId){this.inputBoxId=inputBoxId;}
 BulletPointObject.prototype.exportBulletPointAsText=function(){return"*"+$('#'+this.inputBoxId).val();}
 BulletPointObject.prototype.exportBulletPointAsHtml=function(){return"<li>"+$('#'+this.inputBoxId).val()+"</li>";}
-function BulletListModel(){this.currentUid=-1;this.bulletPoints=[];}
+var BulletListModel=function(){this.currentUid=-1;this.bulletPoints=[];}
 BulletListModel.prototype.addBulletPoint=function(position,bulletPointObject){this.bulletPoints.splice(position,0,bulletPointObject);};BulletListModel.prototype.getBulletPointByIndex=function(position){return this.bulletPoints[position];}
 BulletListModel.prototype.getBulletPointIndexByInputBoxId=function(inputBoxId){var bulletPoint=$.grep(this.bulletPoints,function(value,index){return value.inputBoxId==inputBoxId;})[0];return $.inArray(bulletPoint,this.bulletPoints);}
 BulletListModel.prototype.removeBulletPoint=function(position){this.bulletPoints.splice(position,1);};BulletListModel.prototype.getNumberOfBulletPointsPresent=function(){return this.bulletPoints.length;}
