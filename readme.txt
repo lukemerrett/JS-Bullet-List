@@ -48,3 +48,7 @@ Tested on:
 	Google Chrome
 	Mozilla Firefox
 	Internet Explorer 9
+
+JSFiddle
+========
+http://jsfiddle.net/ZAfpK/
