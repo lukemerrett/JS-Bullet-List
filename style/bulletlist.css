@@ -1,5 +1,11 @@
 ul.jsBulletList li input {
-	border: none;
-	resize: none;
-	width: 100%;
+    border: none;
+    resize: none;
+    width: 90%;
+}
+
+ul.jsBulletList li {
+    list-style-position: inside;
+    list-style-type: disc;
+    
 }
